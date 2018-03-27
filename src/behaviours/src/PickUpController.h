@@ -30,6 +30,7 @@ public:
 
   bool GetIgnoreCenter() {return ignoreCenterSonar;}
   bool GetTargetHeld() {return targetHeld;}
+  int GetWhichTargetHeld() {return targetHeld_id;}
 
   void SetCurrentTimeInMilliSecs( long int time );
 
@@ -45,6 +46,7 @@ private:
 
   bool targetFound;
   bool targetHeld;
+  int targetHeld_id;
 
   // Failsafe state. No legitimate behavior state. If in this state for too long return to searching as default behavior.
   bool timeOut;

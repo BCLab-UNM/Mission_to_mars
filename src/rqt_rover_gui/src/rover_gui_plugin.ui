@@ -950,6 +950,11 @@ padding: 1px 0px 1px 3px; /*This makes text colour work*/
       </property>
       <item>
        <property name="text">
+        <string>SIPI Mission To Mars</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>KSC Concrete</string>
        </property>
       </item>

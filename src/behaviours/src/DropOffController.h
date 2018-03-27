@@ -21,6 +21,7 @@ public:
   void SetCenterLocation(Point center);
   void SetCurrentLocation(Point current);
   void SetTargetPickedUp();
+  void SetWhichTargetPickedUp(int id) {whichTargetPickedUp = id;};
   void SetBlockBlockingUltrasound(bool blockBlock);
   void SetTargetData(vector<Tag> tags);
   bool HasTarget() {return targetHeld;}
@@ -78,6 +79,7 @@ private:
 
   //Center and current locations as of the last call to setLocationData
   Point centerLocation;
+  Point base_location;
   Point currentLocation;
 
   //Time since modeTimer was started, in seconds
@@ -92,6 +94,7 @@ private:
 
   //Flag indicating that a target has been picked up and is held
   bool targetHeld;
+  int whichTargetPickedUp;
 
   //Flag indicating that we're in the center
   bool reachedCollectionPoint;

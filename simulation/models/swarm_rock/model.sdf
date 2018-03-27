@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<sdf version="1.4">
+<model name="swarm_rock">
+  <pose>0 0 0 3.14 0 0</pose>
+  <static>true</static>
+    <link name="link">
+      <collision name="collision">
+          <geometry>
+            <mesh><uri>model://swarm_rock/meshes/swarm_rock.dae</uri></mesh>
+          </geometry>
+      </collision>
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://swarm_rock/meshes/swarm_rock.dae</uri></mesh>
+          </geometry>
+        </visual>
+      </link>
+  </model>
+</sdf>

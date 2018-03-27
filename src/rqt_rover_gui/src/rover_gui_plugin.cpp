@@ -1701,7 +1701,13 @@ void RoverGUIPlugin::buildSimulationButtonEventHandler()
 
     if(!ui.create_savable_world_checkbox->isChecked())
     {
-        if (ui.texture_combobox->currentText() == "Gravel")
+        if (ui.texture_combobox->currentText() == "Mission to Mars")
+        {
+            emit sendInfoLogMessage("Adding Mission to Mars gound plane...");
+            return_msg = sim_mgr.addGroundPlane("mission_to_mars_ground");
+            emit sendInfoLogMessage(return_msg);
+        }
+        else if (ui.texture_combobox->currentText() == "Gravel")
         {
             emit sendInfoLogMessage("Adding gravel ground plane...");
             return_msg = sim_mgr.addGroundPlane("mars_ground_plane");

@@ -34,6 +34,7 @@ DropOffController::DropOffController() {
   isPrecisionDriving = false;
   startWaypoint = false;
   timerTimeElapsed = -1;
+  whichTargetPickedUp = 0;
 
 }
 
@@ -91,7 +92,7 @@ Result DropOffController::DoWork() {
   }
 
   // Calculates the shortest distance to the center location from the current location
-  double distanceToCenter = hypot(this->centerLocation.x - this->currentLocation.x, this->centerLocation.y - this->currentLocation.y);
+  double distanceToCenter = hypot(base_location.x - this->currentLocation.x, base_location.y - this->currentLocation.y);
 
   //check to see if we are driving to the center location or if we need to drive in a circle and look.
   if (distanceToCenter > collectionPointVisualDistance && !circularCenterSearching && (count == 0)) {
@@ -99,8 +100,8 @@ Result DropOffController::DoWork() {
     result.type = waypoint;
     // Clears all the waypoints in the vector
     result.wpts.waypoints.clear();
-    // Adds the current location's point into the waypoint vector
-    result.wpts.waypoints.push_back(this->centerLocation);
+    // Adds the base location's point into the waypoint vector
+    result.wpts.waypoints.push_back(base_location);
     // Do not start following waypoints
     startWaypoint = false;
     // Disable precision driving
@@ -117,8 +118,8 @@ Result DropOffController::DoWork() {
 
     //sets a goal that is 60cm from the centerLocation and spinner
     //radians counterclockwise from being purly along the x-axis.
-    nextSpinPoint.x = centerLocation.x + (initialSpinSize + spinSizeIncrease) * cos(spinner);
-    nextSpinPoint.y = centerLocation.y + (initialSpinSize + spinSizeIncrease) * sin(spinner);
+    nextSpinPoint.x = base_location.x + (initialSpinSize + spinSizeIncrease) * cos(spinner);
+    nextSpinPoint.y = base_location.y + (initialSpinSize + spinSizeIncrease) * sin(spinner);
     nextSpinPoint.theta = atan2(nextSpinPoint.y - currentLocation.y, nextSpinPoint.x - currentLocation.x);
 
     result.type = waypoint;
@@ -246,7 +247,7 @@ Result DropOffController::DoWork() {
       centerApproach = false;
 
       result.type = waypoint;
-      result.wpts.waypoints.push_back(this->centerLocation);
+      result.wpts.waypoints.push_back(base_location);
       if (isPrecisionDriving) {
         result.type = behavior;
         result.b = prevProcess;
@@ -391,6 +392,16 @@ bool DropOffController::IsChangingMode() {
 // Of the Point class (x, y, theta)
 void DropOffController::SetCenterLocation(Point center) {
   centerLocation = center;
+    /*** new logic for mission to mars.
+			if carrying tag id 0 => ice go to ice base at (0,3)
+			if carrying tag id 1 => mineral go to mine base at (0, -2)
+		*/
+  base_location = this->centerLocation;
+	if (whichTargetPickedUp == 0) {
+  	base_location.y += 3.0;
+	} else {
+		base_location.y -= 2.0;
+	}
 }
 
 // Setter function to set the current location of the Point class (x, y, theta)

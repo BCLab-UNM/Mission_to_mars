@@ -48,12 +48,13 @@ Result SearchController::DoWork() {
     Point  searchLocation;
 
     //select new position 50 cm from current location
+	//changed values from .5 to 2 -AW
     if (first_waypoint)
     {
       first_waypoint = false;
       searchLocation.theta = currentLocation.theta + M_PI;
-      searchLocation.x = currentLocation.x + (0.5 * cos(searchLocation.theta));
-      searchLocation.y = currentLocation.y + (0.5 * sin(searchLocation.theta));
+      searchLocation.x = currentLocation.x + (2 * cos(searchLocation.theta));
+      searchLocation.y = currentLocation.y + (2 * sin(searchLocation.theta));
     }
     else
     {

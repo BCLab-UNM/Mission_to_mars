@@ -1,0 +1,9 @@
+<model>
+  <name>tent</name>
+  <version>1.0</version>
+  <sdf version="1.5">model.sdf</sdf>
+
+  <description>
+    a tent to serve as the various laboratoris on mars
+  </description>
+</model>

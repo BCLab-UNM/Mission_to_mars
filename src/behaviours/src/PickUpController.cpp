@@ -40,10 +40,11 @@ void PickUpController::SetTagData(vector<Tag> tags)
     for (int i = 0; i < tags.size(); i++)
     {
 
-      if (tags[i].getID() == 0)
+      if (tags[i].getID() == 0 || tags[i].getID() == 1)
       {
 
         targetFound = true;
+	targetHeld_id = tags[i].getID();
 
         //absolute distance to block from camera lens
         double test = hypot(hypot(tags[i].getPositionX(), tags[i].getPositionY()), tags[i].getPositionZ());

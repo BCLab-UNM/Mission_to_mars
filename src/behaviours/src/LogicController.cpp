@@ -325,6 +325,8 @@ void LogicController::controllerInterconnect()
     if(pickUpController.GetTargetHeld())
     {
       dropOffController.SetTargetPickedUp();
+      dropOffController.SetWhichTargetPickedUp(
+		pickUpController.GetWhichTargetHeld());
       obstacleController.setTargetHeld();
       searchController.SetSuccesfullPickup();
     }
